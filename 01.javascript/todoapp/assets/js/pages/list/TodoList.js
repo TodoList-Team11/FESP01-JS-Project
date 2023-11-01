@@ -126,15 +126,6 @@ const TodoList = async function () {
       e.preventDefault();
       const id = e.dataTransfer.getData("text/plain");
       await updateTodoStatus(id, isDone);
-      const dragEl = document.getElementById(id);
-      if (dragEl) {
-        const checkbox = dragEl.querySelector("input[type='checkbox']");
-        if (checkbox) {
-          checkbox.checked = isDone;
-          await updateTodoStatus(id, isDone);
-        }
-        e.target.appendChild(dragEl);
-      }
     }
 
     // allow drop
