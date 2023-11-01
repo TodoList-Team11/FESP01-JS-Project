@@ -85,7 +85,7 @@ const TodoInfo = async function () {
     event.preventDefault();
     if (confirm("삭제하시겠습니까?")) {
       axios.delete(`http://localhost:33088/api/todolist/${ID}`);
-      linkTo("/");
+      window.location.replace("/");
     }
   });
 
