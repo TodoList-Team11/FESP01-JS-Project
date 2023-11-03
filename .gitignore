@@ -1,3 +1,5 @@
 # ins
 .history
 ins
+node_modules
+.git
