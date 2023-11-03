@@ -1,20 +1,14 @@
 // 할일 수정
 import Header from "../../layout/Header.js";
 import Footer from "../../layout/Footer.js";
-
-import isEmpty from "../../utils/isEmpty.js";
-import update from "../../apis/update.js";
+import useUpdateTodoInfo from "../../apis/useUpdateTodoInfo.js";
+import getId from "../../utils/getId.js";
+import useSelectTodoInfo from "../../apis/useSelectTodoInfo.js";
 
 const TodoUpdate = async () => {
-  //주소에서 id 가져오기
-  const urlStr = window.location.href;
-  const url = new URL(urlStr);
-  const urlparams = url.searchParams;
-  const ID = urlparams.get("_id");
-
-  const response = await axios.get(`http://localhost:33088/api/todolist/${ID}`);
-
-  const item = response.data.item;
+  const ID = getId();
+  const data = await useSelectTodoInfo(ID);
+  const item = data.item;
 
   const page = document.createElement("div");
   page.setAttribute("id", "page");
@@ -85,8 +79,7 @@ const TodoUpdate = async () => {
       alert("상세 내용을 입력하세요");
     }
     if (confirm("할 일을 수정하시겠습니까?")) {
-      // axios post
-      update({
+      useUpdateTodoInfo({
         ...item,
         title: titleInput.value,
         content: contentInput.value,
